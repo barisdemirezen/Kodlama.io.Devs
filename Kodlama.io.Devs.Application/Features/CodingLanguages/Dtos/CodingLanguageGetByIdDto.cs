@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kodlama.io.Devs.Application.Features.CodingLanguages.Dtos
 {
-    internal class CodingLanguageGetByIdDto
+    public class CodingLanguageGetByIdDto
     {
     }
 }

@@ -30,8 +30,8 @@ namespace Kodlama.io.Devs.Application.Features.CodingLanguages.Commands.CreateCo
                 
                 CodingLanguage codingLanguage = _mapper.Map<CodingLanguage>(request);
                 CodingLanguage createdCodingLanguage = await _codingLanguageRepository.AddAsync(codingLanguage);
-                CreatedCodingLanguageDto createdCodingLanguageDto = _mapper.Map<CreatedCodingLanguageDto>(createdCodingLanguage);
-                return createdCodingLanguageDto;
+                CreatedCodingLanguageDto mappedCreatedCodingLanguageDto = _mapper.Map<CreatedCodingLanguageDto>(createdCodingLanguage);
+                return mappedCreatedCodingLanguageDto;
             }
         }
     }
