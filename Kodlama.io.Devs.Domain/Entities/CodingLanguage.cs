@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Kodlama.io.Devs.Domain.Entities
 {
-    public class CodingLanguage : BaseEntity
+    public class CodingLanguage : Entity
     {
         public string Name { get; set; }
     }

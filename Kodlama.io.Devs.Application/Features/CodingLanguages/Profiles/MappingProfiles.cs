@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using Kodlama.io.Devs.Application.Features.CodingLanguages.Dtos;
+using Kodlama.io.Devs.Application.Features.CodingLanguages.Models;
+using Kodlama.io.Devs.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +14,11 @@ namespace Kodlama.io.Devs.Application.Features.CodingLanguages.Profiles
     {
         public MappingProfiles()
         {
-            CreateMap<Domain.Entities.CodingLanguage, Models.CodingLanguageListModel>();
-            CreateMap<Domain.Entities.CodingLanguage, Dtos.CodingLanguageListDto>();
-            CreateMap<Domain.Entities.CodingLanguage, Dtos.CodingLanguageGetByIdDto>();
-            CreateMap<Domain.Entities.CodingLanguage, Dtos.CreatedCodingLanguageDto>();
+            CreateMap<CodingLanguage, CodingLanguageListModel>();
+            CreateMap<CodingLanguage, CodingLanguageListDto>();
+            CreateMap<CodingLanguage, CodingLanguageGetByIdDto>();
+            CreateMap<CodingLanguage, CreatedCodingLanguageDto>();
+            CreateMap<CodingLanguage, DeletedCodingLanguageDto>();
         }
     }
 }

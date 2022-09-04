@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Kodlama.io.Devs.Application.Features.CodingLanguages.Dtos;
+using Kodlama.io.Devs.Application.Features.CodingLanguages.Rules;
 using Kodlama.io.Devs.Application.Services.Repositories;
 using Kodlama.io.Devs.Domain.Entities;
 using MediatR;
@@ -19,6 +20,7 @@ namespace Kodlama.io.Devs.Application.Features.CodingLanguages.Commands.CreateCo
         {
             private readonly ICodingLanguageRepository _codingLanguageRepository;
             private readonly IMapper _mapper;
+            private readonly CodingLanguageBusinessRules _codingLanguageBusinessRules;
             public CreateCodingLanguageCommandHandler(ICodingLanguageRepository codingLanguageRepository, IMapper mapper)
             {
                 _mapper = mapper;
