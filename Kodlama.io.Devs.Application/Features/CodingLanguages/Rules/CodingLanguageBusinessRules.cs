@@ -1,4 +1,5 @@
-﻿using Kodlama.io.Devs.Application.Services.Repositories;
+﻿using Core.CrossCuttingConcerns.Exceptions;
+using Kodlama.io.Devs.Application.Services.Repositories;
 using Kodlama.io.Devs.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,11 @@ namespace Kodlama.io.Devs.Application.Features.CodingLanguages.Rules
         {
             _codingLanguageRepository = codingLanguageRepository;
         }
-        public async Task CheckIfCodingLanguageExists(string name)
+        public async Task CodingLanguageNameCannotBeRepeatedWhenInsertedAsync(string name)
         {
             CodingLanguage? codingLanguage = await _codingLanguageRepository.GetAsync(e => e.Name == name);
             if (codingLanguage != null)
-                throw new Exception("Coding language already exists");
+                throw new BusinessException("Coding language already exists");
         }
     }
 }

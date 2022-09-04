@@ -21,15 +21,16 @@ namespace Kodlama.io.Devs.Application.Features.CodingLanguages.Commands.CreateCo
             private readonly ICodingLanguageRepository _codingLanguageRepository;
             private readonly IMapper _mapper;
             private readonly CodingLanguageBusinessRules _codingLanguageBusinessRules;
-            public CreateCodingLanguageCommandHandler(ICodingLanguageRepository codingLanguageRepository, IMapper mapper)
+            public CreateCodingLanguageCommandHandler(ICodingLanguageRepository codingLanguageRepository, IMapper mapper, CodingLanguageBusinessRules codingLanguageBusinessRules)
             {
                 _mapper = mapper;
                 _codingLanguageRepository = codingLanguageRepository;
+                _codingLanguageBusinessRules = codingLanguageBusinessRules;
             }
             public async Task<CreatedCodingLanguageDto> Handle(CreateCodingLanguageCommand request, CancellationToken cancellationToken)
             {
-                // Run business rules
-                
+                await _codingLanguageBusinessRules.CodingLanguageNameCannotBeRepeatedWhenInsertedAsync(request.Name);
+
                 CodingLanguage codingLanguage = _mapper.Map<CodingLanguage>(request);
                 CodingLanguage createdCodingLanguage = await _codingLanguageRepository.AddAsync(codingLanguage);
                 CreatedCodingLanguageDto mappedCreatedCodingLanguageDto = _mapper.Map<CreatedCodingLanguageDto>(createdCodingLanguage);

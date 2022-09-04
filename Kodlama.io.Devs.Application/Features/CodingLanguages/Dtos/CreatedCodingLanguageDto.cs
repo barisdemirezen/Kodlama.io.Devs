@@ -8,5 +8,7 @@ namespace Kodlama.io.Devs.Application.Features.CodingLanguages.Dtos
 {
     public class CreatedCodingLanguageDto
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }
