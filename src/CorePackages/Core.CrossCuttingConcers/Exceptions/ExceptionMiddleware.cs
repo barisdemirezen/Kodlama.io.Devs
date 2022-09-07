@@ -32,6 +32,7 @@ public class ExceptionMiddleware
 
         if (exception.GetType() == typeof(ValidationException)) return CreateValidationException(context, exception);
         if (exception.GetType() == typeof(BusinessException)) return CreateBusinessException(context, exception);
+        if (exception.GetType() == typeof(NotFoundException)) return CreateNotFoundException(context, exception);
         if (exception.GetType() == typeof(AuthorizationException))
             return CreateAuthorizationException(context, exception);
         return CreateInternalException(context, exception);
@@ -60,6 +61,20 @@ public class ExceptionMiddleware
             Status = StatusCodes.Status400BadRequest,
             Type = "https://example.com/probs/business",
             Title = "Business exception",
+            Detail = exception.Message,
+            Instance = ""
+        }.ToString());
+    }
+
+    private Task CreateNotFoundException(HttpContext context, Exception exception)
+    {
+        context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.NotFound);
+
+        return context.Response.WriteAsync(new BusinessProblemDetails
+        {
+            Status = StatusCodes.Status404NotFound,
+            Type = "https://example.com/probs/business",
+            Title = "Not found",
             Detail = exception.Message,
             Instance = ""
         }.ToString());

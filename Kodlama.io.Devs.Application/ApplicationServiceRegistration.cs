@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 using AutoMapper;
+using Core.Application.Pipelines.Validation;
 
 namespace Kodlama.io.Devs.Application
 {
@@ -26,7 +27,7 @@ namespace Kodlama.io.Devs.Application
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheRemovingBehavior<,>));
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
             return services;
 

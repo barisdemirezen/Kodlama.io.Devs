@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Kodlama.io.Devs.Application.Features.CodingLanguages.Dtos
 {
-    public class CodingLanguageListDto
+    public class UpdatedCodingLanguageDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public DateTime CreateDate { get; set; }
-        public DateTime UpdateDate { get; set; }
     }
 }

@@ -10,6 +10,6 @@ namespace Kodlama.io.Devs.Application.Features.CodingLanguages.Models
 {
     public class CodingLanguageListModel : BasePageableModel
     {
-        public IList<CodingLanguageListDto> Items { get; set; }
+        public List<CodingLanguageListDto> Items { get; set; }
     }
 }

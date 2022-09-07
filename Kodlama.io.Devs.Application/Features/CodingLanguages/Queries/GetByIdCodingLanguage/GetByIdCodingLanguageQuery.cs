@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.CrossCuttingConcerns.Exceptions;
 using Kodlama.io.Devs.Application.Features.CodingLanguages.Dtos;
 using Kodlama.io.Devs.Application.Services.Repositories;
 using Kodlama.io.Devs.Domain.Entities;
@@ -27,6 +28,9 @@ namespace Kodlama.io.Devs.Application.Features.CodingLanguages.Queries.GetByIdCo
             public async Task<CodingLanguageGetByIdDto> Handle(GetByIdCodingLanguageQuery request, CancellationToken cancellationToken)
             {
                 CodingLanguage? codingLanguage = await _codingLanguageRepository.GetAsync(e => e.Id == request.Id);
+
+                if (codingLanguage == null)
+                    throw new NotFoundException("Coding language not found");
 
                 CodingLanguageGetByIdDto mappedCodingLanguageGetByIdDto = _mapper.Map<CodingLanguageGetByIdDto>(codingLanguage);
                 return mappedCodingLanguageGetByIdDto;

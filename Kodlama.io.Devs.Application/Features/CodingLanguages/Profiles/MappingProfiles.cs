@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.Persistence.Paging;
 using Kodlama.io.Devs.Application.Features.CodingLanguages.Commands.CreateCodingLanguage;
+using Kodlama.io.Devs.Application.Features.CodingLanguages.Commands.UpdateCodingLanguage;
 using Kodlama.io.Devs.Application.Features.CodingLanguages.Dtos;
 using Kodlama.io.Devs.Application.Features.CodingLanguages.Models;
 using Kodlama.io.Devs.Domain.Entities;
@@ -23,6 +24,8 @@ namespace Kodlama.io.Devs.Application.Features.CodingLanguages.Profiles
             CreateMap<CodingLanguage, DeletedCodingLanguageDto>();
             CreateMap<IPaginate<CodingLanguage>, CodingLanguageListModel>();
             CreateMap<CreateCodingLanguageCommand, CodingLanguage>();
+            CreateMap<UpdateCodingLanguageCommand, CodingLanguage>();
+            CreateMap<CodingLanguage, UpdatedCodingLanguageDto>();
         }
     }
 }

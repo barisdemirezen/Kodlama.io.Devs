@@ -32,7 +32,6 @@ namespace Kodlama.io.Devs.Application.Features.CodingLanguages.Queries.GetListCo
                 IPaginate<CodingLanguage> codingLanguages = await _codingLanguageRepository.GetListAsync(index: request.PageRequest.Page, size: request.PageRequest.PageSize);
                 CodingLanguageListModel mappedCodingLanguageListModel = _mapper.Map<CodingLanguageListModel>(codingLanguages);
                 return mappedCodingLanguageListModel;
-                throw new NotImplementedException();
             }
         }
 
