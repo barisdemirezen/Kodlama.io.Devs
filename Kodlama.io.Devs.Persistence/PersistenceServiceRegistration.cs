@@ -20,7 +20,9 @@ namespace Kodlama.io.Devs.Persistence
             services.AddDbContext<BaseDbContext>(options =>
                                                      options.UseSqlServer(
                                                          configuration.GetConnectionString("DbString")));
+            
             services.AddScoped<ICodingLanguageRepository, CodingLanguageRepository>();
+            services.AddScoped<IFrameworkRepository, FrameworkRepository>();
 
             return services;
         }

@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace Kodlama.io.Devs.Domain.Entities
 {
-    public class CodingLanguage : Entity
+    public class Framework : Entity
     {
         public string Name { get; set; }
-        public virtual List<Framework>? Frameworks{ get; set; }
+        public int CodingLanguageId { get; set; }
+        public virtual CodingLanguage? CodingLanguage { get; set; }
     }
 }

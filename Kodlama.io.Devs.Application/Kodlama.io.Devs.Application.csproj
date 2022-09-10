@@ -17,4 +17,11 @@
     <ProjectReference Include="..\src\CorePackages\Core.Persistence\Core.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Technologies\Models\" />
+    <Folder Include="Features\Technologies\Profiles\" />
+    <Folder Include="Features\Technologies\Rules\" />
+    <Folder Include="Features\Technologies\Queries\" />
+  </ItemGroup>
+
 </Project>
