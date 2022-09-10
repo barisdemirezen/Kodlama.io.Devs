@@ -12,20 +12,20 @@ using System.Threading.Tasks;
 
 namespace Kodlama.io.Devs.Application.Features.Technologies.Commands.DeleteFramework
 {
-    public class DeletedFrameworkCommand : IRequest<DeletedFrameworkDto>
+    public class DeleteFrameworkCommand : IRequest<DeletedFrameworkDto>
     {
         public int Id { get; set; }
-        public class DeletedFrameworkCommandHandler : IRequestHandler<DeletedFrameworkCommand, DeletedFrameworkDto>
+        public class DeletedrameworkCommandHandler : IRequestHandler<DeleteFrameworkCommand, DeletedFrameworkDto>
         {
             private readonly IMapper _mapper;
             private readonly IFrameworkRepository _frameworkRepository;
 
-            public DeletedFrameworkCommandHandler(IMapper mapper, IFrameworkRepository frameworkRepository)
+            public DeletedrameworkCommandHandler(IMapper mapper, IFrameworkRepository frameworkRepository)
             {
                 _mapper = mapper;
                 _frameworkRepository = frameworkRepository;
             }
-            public async Task<DeletedFrameworkDto> Handle(DeletedFrameworkCommand request, CancellationToken cancellationToken)
+            public async Task<DeletedFrameworkDto> Handle(DeleteFrameworkCommand request, CancellationToken cancellationToken)
             {
                 // id cannot be null
 
