@@ -8,5 +8,8 @@ namespace Kodlama.io.Devs.Application.Features.Technologies.Dtos
 {
     public class CreatedFrameworkDto
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public DateTime CreateDate { get; set; }
     }
 }

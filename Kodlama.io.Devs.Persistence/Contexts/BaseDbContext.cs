@@ -14,6 +14,7 @@ namespace Kodlama.io.Devs.Persistence.Contexts
     {
         protected IConfiguration Configuration { get; set; }
         public DbSet<CodingLanguage> CodingLanguages { get; set; }
+        public DbSet<Framework> Frameworks { get; set; }
 
 
         public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
@@ -31,6 +32,19 @@ namespace Kodlama.io.Devs.Persistence.Contexts
                 a.Property(p => p.UpdateDate).HasColumnName("UpdateDate").IsRequired(false);
                 a.Property(p => p.CreateDate).HasColumnName("CreateDate");
             });
+
+            modelBuilder.Entity<Framework>(a =>
+            {
+                a.ToTable("Frameworks").HasKey(k => k.Id);
+                a.Property(p => p.Id).HasColumnName("Id");
+                a.Property(p => p.Name).HasColumnName("Name");
+                a.Property(p => p.CodingLanguageId).HasColumnName("CodingLanguageId");
+                a.Property(p => p.UpdateDate).HasColumnName("UpdateDate").IsRequired(false);
+                a.Property(p => p.CreateDate).HasColumnName("CreateDate");
+
+                a.HasOne(p => p.CodingLanguage).WithMany(p => p.Frameworks).HasForeignKey(p => p.CodingLanguageId);
+            });
+
         }
 
         #region Auto generate CreateDate and UpdateDate

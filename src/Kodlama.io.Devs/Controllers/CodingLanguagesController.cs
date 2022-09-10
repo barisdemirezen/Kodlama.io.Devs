@@ -6,6 +6,7 @@ using Kodlama.io.Devs.Application.Features.CodingLanguages.Dtos;
 using Kodlama.io.Devs.Application.Features.CodingLanguages.Models;
 using Kodlama.io.Devs.Application.Features.CodingLanguages.Queries.GetByIdCodingLanguage;
 using Kodlama.io.Devs.Application.Features.CodingLanguages.Queries.GetListCodingLanguage;
+using Kodlama.io.Devs.Application.Features.Technologies.Queries.GetByCodingLanguageIdFramework;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +27,15 @@ namespace Kodlama.io.Devs.Controllers
         public async Task<IActionResult> GetByIdAsync(int id)
         {
             var response = await Mediator.Send(new GetByIdCodingLanguageQuery { Id = id });
+            return Ok(response);
+        }
+
+        [HttpGet("{id}/framework")]
+        public async Task<IActionResult> GetFrameworkByCodingLanguageIdAsync([FromQuery] PageRequest pageRequest, int id)
+        {
+            // will test
+            
+            var response = await Mediator.Send(new GetByCodingLanguageIdFrameworkQuery { CodingLanguageId = id, PageRequest = pageRequest });
             return Ok(response);
         }
 
