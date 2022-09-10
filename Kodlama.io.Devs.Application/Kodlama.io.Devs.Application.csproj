@@ -17,8 +17,4 @@
     <ProjectReference Include="..\src\CorePackages\Core.Persistence\Core.Persistence.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Technologies\Rules\" />
-  </ItemGroup>
-
 </Project>

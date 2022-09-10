@@ -27,9 +27,7 @@ namespace Kodlama.io.Devs.Application.Features.Technologies.Commands.DeleteFrame
             }
             public async Task<DeletedFrameworkDto> Handle(DeleteFrameworkCommand request, CancellationToken cancellationToken)
             {
-                // id cannot be null
-
-                Framework framework = await _frameworkRepository.GetAsync(e => e.Id == request.Id);
+                Framework? framework = await _frameworkRepository.GetAsync(e => e.Id == request.Id);
 
                 if (framework == null)
                     throw new NotFoundException("Framework not found");

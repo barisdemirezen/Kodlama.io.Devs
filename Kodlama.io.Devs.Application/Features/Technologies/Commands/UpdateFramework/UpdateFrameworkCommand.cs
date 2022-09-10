@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.CrossCuttingConcerns.Exceptions;
 using Kodlama.io.Devs.Application.Features.Technologies.Dtos;
+using Kodlama.io.Devs.Application.Features.Technologies.Rules;
 using Kodlama.io.Devs.Application.Services.Repositories;
 using Kodlama.io.Devs.Domain.Entities;
 using MediatR;
@@ -22,23 +23,24 @@ namespace Kodlama.io.Devs.Application.Features.Technologies.Commands.UpdateFrame
         {
             private readonly IMapper _mapper;
             private readonly IFrameworkRepository _frameworkRepository;
+            private readonly FrameworkBusinessRules _frameworkBusinessRules;
             
-            public UpdatedFrameworkCommandHandler(IMapper mapper, IFrameworkRepository frameworkRepository)
+            public UpdatedFrameworkCommandHandler(IMapper mapper, IFrameworkRepository frameworkRepository, FrameworkBusinessRules frameworkBusinessRules)
             {
                 _mapper = mapper;
                 _frameworkRepository = frameworkRepository;
+                _frameworkBusinessRules = frameworkBusinessRules;
             }
 
             public async Task<UpdatedFrameworkDto> Handle(UpdateFrameworkCommand request, CancellationToken cancellationToken)
             {
-                // name cannot be repeated
-                // coding language id must exist
-                // Id must exists
-
                 Framework? framework = await _frameworkRepository.GetAsync(e => e.Id == request.Id);
 
                 if (framework == null)
                     throw new NotFoundException("Framework not found");
+                
+                await _frameworkBusinessRules.CodingLanguageMustExistForFrameworkOperationsAsync(request.CodingLanguageId);
+                await _frameworkBusinessRules.FrameworkNameCannotBeRepeatedWhenInsertedAsync(request.Name);
 
                 framework = _mapper.Map(request, framework);
 

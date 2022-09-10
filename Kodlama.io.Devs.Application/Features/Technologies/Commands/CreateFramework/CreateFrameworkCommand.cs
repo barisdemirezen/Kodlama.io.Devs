@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Kodlama.io.Devs.Application.Features.Technologies.Dtos;
+using Kodlama.io.Devs.Application.Features.Technologies.Rules;
 using Kodlama.io.Devs.Application.Services.Repositories;
 using Kodlama.io.Devs.Domain.Entities;
 using MediatR;
@@ -20,17 +21,19 @@ namespace Kodlama.io.Devs.Application.Features.Technologies.Commands.CreateFrame
         {
             private readonly IMapper _mapper;
             private readonly IFrameworkRepository _frameworkRepository;
+            private readonly FrameworkBusinessRules _frameworkBusinessRules;
 
-            public CreatedFrameworkCommandHandler(IMapper mapper, IFrameworkRepository frameworkRepository)
+            public CreatedFrameworkCommandHandler(IMapper mapper, IFrameworkRepository frameworkRepository, FrameworkBusinessRules frameworkBusinessRules)
             {
                 _mapper = mapper;
                 _frameworkRepository = frameworkRepository;
+                _frameworkBusinessRules = frameworkBusinessRules;
             }
 
             public async Task<CreatedFrameworkDto> Handle(CreateFrameworkCommand request, CancellationToken cancellationToken)
             {
-                // name cannot be repeated
-                // coding language id must exist
+                await _frameworkBusinessRules.FrameworkNameCannotBeRepeatedWhenInsertedAsync(request.Name);
+                await _frameworkBusinessRules.CodingLanguageMustExistForFrameworkOperationsAsync(request.CodingLanguageId);
 
                 Framework framework = _mapper.Map<Framework>(request);
                 Framework createdFramework = await _frameworkRepository.AddAsync(framework);

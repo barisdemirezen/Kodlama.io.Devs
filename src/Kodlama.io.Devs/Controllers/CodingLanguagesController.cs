@@ -30,11 +30,9 @@ namespace Kodlama.io.Devs.Controllers
             return Ok(response);
         }
 
-        [HttpGet("{id}/framework")]
+        [HttpGet("{id}/frameworks")]
         public async Task<IActionResult> GetFrameworkByCodingLanguageIdAsync([FromQuery] PageRequest pageRequest, int id)
         {
-            // will test
-            
             var response = await Mediator.Send(new GetByCodingLanguageIdFrameworkQuery { CodingLanguageId = id, PageRequest = pageRequest });
             return Ok(response);
         }
@@ -50,13 +48,8 @@ namespace Kodlama.io.Devs.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAsync(int id, [FromBody] UpdateCodingLanguageCommand updateCodingLanguageCommand )
         {
-            UpdateCodingLanguageCommand createdUpdateCodingLanguage = new()
-            {
-                Id = id,
-                Name = updateCodingLanguageCommand.Name
-            };
-
-            UpdatedCodingLanguageDto updatedCodingLanguageDto = await Mediator.Send(createdUpdateCodingLanguage);
+            updateCodingLanguageCommand.Id = id;
+            UpdatedCodingLanguageDto updatedCodingLanguageDto = await Mediator.Send(updateCodingLanguageCommand);
             return Ok(updatedCodingLanguageDto);
         }
 
